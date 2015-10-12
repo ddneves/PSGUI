@@ -24,9 +24,11 @@ Many times there had been administrators, customers and friends who asked for a 
 
 Though you should never forget – by adding a GUI to a module / function of yours you can prevent lots of input errors by the user. The user gets happy because he can click and sees a wonderful design and you can add an additional abstraction layer preventing lots of headaches.
 
-Aims
+
+###Aims
 
 The primary aims with this project had been:
+
 
 ######- everyone can do it
 ######- structured and separated code by logic
@@ -37,5 +39,6 @@ The primary aims with this project had been:
 ######- preconfigured examples for some use-cases
 ######- as many internal functions to avoid manual work
 ######- no dependencies to proprietary programs
+
  
 ####Interested? then take a look into!
