@@ -2,19 +2,18 @@
 
 ########################################################################
 ##
-##    Created by:   	David das Neves
-##    Created on:   	13.10.2015
-##    Version:        	0.1
+####    Created by:   	David das Neves
+####   Version:        	0.1
 ##  
-##    Please view my contributions in my blog for further information. 
+####   Please view my contributions in my blog for further information. 
 ## 
-##    http://powerintheshell.com/category/psgui/
+##  http://powerintheshell.com/category/psgui/
 ##
 ########################################################################
 
 
 ########################################################################
-##  Short Description
+####  Short Description
 ########################################################################
 
 3 months ago i started a project to create user interfaces for Powershell with WPF as simple as possible for everyone by using a  – POWERSHELL GUI.
@@ -29,14 +28,14 @@ Aims
 
 The primary aims with this project had been:
 
- everyone can do it 
- structured and separated code by logic
- easy to create and deploy dialogs
- easy to manage multiple dialogs
- free code to use for everyone
- examples for small and easy but also further on more complex solutions
- preconfigured examples for some use-cases
- as many internal functions to avoid manual work
- no dependencies to proprietary programs
+######- everyone can do it
+######- structured and separated code by logic
+######- easy to create and deploy dialogs
+######- easy to manage multiple dialogs
+######- free code to use for everyone
+######- examples for small and easy but also further on more complex solutions
+######- preconfigured examples for some use-cases
+######- as many internal functions to avoid manual work
+######- no dependencies to proprietary programs
  
- Interested? then take a look into!
+####Interested? then take a look into!
