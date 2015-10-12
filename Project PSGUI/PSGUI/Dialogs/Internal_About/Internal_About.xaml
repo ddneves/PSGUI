@@ -1,0 +1,8 @@
+<Window x:Class="PSGUI.PSGUI_about"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PSGUI About" Height="720px" Width="1280px" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\pSyKo\OneDrive\_Projekte\PS\PSGUI\WPFApplication\PSGUI\PSGUI\Resources\PSGUI_About.jpg"></ImageBrush>
+    </Window.Background>
+</Window>
