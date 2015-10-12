@@ -103,18 +103,18 @@
         <!-- Menu -->
         <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Height="32" VerticalAlignment="Top" Background="DarkBlue" FontSize="16" HorizontalAlignment="Stretch"  Foreground="White" >
             <MenuItem Header="File"  Width="40px" Height="28" Foreground="White">
-                <MenuItem x:Name="miOpen" Header="Open" />
-                <MenuItem x:Name="miOpenPath" Header="Open Path" />
+                <MenuItem x:Name="miOpen" Header="Open"  IsEnabled="False"/>
+                <MenuItem x:Name="miOpenPath" Header="Open Path" IsEnabled="False" />
                 <MenuItem x:Name="miSave" Header="Save" InputGestureText="Ctrl+S" />
                 <MenuItem x:Name="miQuit" Header="Quit" />
             </MenuItem>
             <MenuItem Header="Dialogs" Width="70px" Foreground="White">
                 <MenuItem x:Name="miNewDialog" Header="New Dialog" />
                 <MenuItem x:Name="miRenameDialog" Header="Rename Dialog" />
-                <MenuItem x:Name="miDeleteDialog" Header="Delete Dialog" />
+                <MenuItem x:Name="miDeleteDialog" Header="Delete Dialog" IsEnabled="False" />
                 <MenuItem x:Name="miRenderDialog" Header="Render Dialog"  InputGestureText="Ctrl+R" />
             </MenuItem>
-            <MenuItem Header="Package" Width="70px" Foreground="White">
+            <MenuItem Header="Package" Width="75px" Foreground="White">
                 <MenuItem x:Name="miCreatePackage" Header="Create Package" />
                 <!--<MenuItem x:Name="miCreateExecutable" Header="Create Executable" />-->
             </MenuItem>
