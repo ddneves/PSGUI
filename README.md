@@ -29,14 +29,14 @@ Aims
 
 The primary aims with this project had been:
 
-everyone can do it
-structured and separated code by logic
-easy to create and deploy dialogs
-easy to manage multiple dialogs
-free code to use for everyone
-examples for small and easy but also further on more complex solutions
-preconfigured examples for some use-cases
-as many internal functions to avoid manual work
-no dependencies to proprietary programs
-
-Interested? then take a look into!
+ everyone can do it
+ structured and separated code by logic
+ easy to create and deploy dialogs
+ easy to manage multiple dialogs
+ free code to use for everyone
+ examples for small and easy but also further on more complex solutions
+ preconfigured examples for some use-cases
+ as many internal functions to avoid manual work
+ no dependencies to proprietary programs
+ 
+ Interested? then take a look into!
