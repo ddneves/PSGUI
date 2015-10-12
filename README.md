@@ -29,7 +29,7 @@ Aims
 
 The primary aims with this project had been:
 
- everyone can do it
+ everyone can do it 
  structured and separated code by logic
  easy to create and deploy dialogs
  easy to manage multiple dialogs
