@@ -1,10 +1,9 @@
-# PSGUI
-Powershell GUI with XAML WPF
+# PSGUI with GUI-Manager
 
 ########################################################################
 ##
-##    Created on:   	13.10.2015
 ##    Created by:   	David das Neves
+##    Created on:   	13.10.2015
 ##    Version:        0.1
 ##  
 ##    Please view my contributions in my blog for further information. 
