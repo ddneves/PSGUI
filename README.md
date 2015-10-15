@@ -7,7 +7,7 @@
 ##  
 ####   Please view my contributions in my blog for further information. 
 ## 
-##  http://powerintheshell.com/category/psgui/
+##  http://powerintheshell.com/psgui-first-start-3/
 ##
 ########################################################################
 
