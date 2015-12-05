@@ -1,9 +1,9 @@
 ﻿<#	
     .NOTES
     ===========================================================================
-        Created on:   	04.10.2015
+        Created on:   	31.11.2015
         Created by:   	David das Neves
-        Version:        0.1
+        Version:        0.2
         Project:        PSGUI
         Filename:       Open-XAMLDialog.ps1
     ===========================================================================
@@ -24,7 +24,7 @@ function Open-XAMLDialog
     Param
     (
         #Name of the dialog
-        [Parameter(Mandatory=$true, Position=1)]
+        [Parameter(Mandatory=$false, Position=1)]
         [Alias('Name')] 
         $DialogName,
 
@@ -50,33 +50,53 @@ function Open-XAMLDialog
     {
     }
     Process
-    {        
-        if ($DialogName -like 'Internal_*')
-        {
-            $DialogPath = "$Internal_DialogFolder\$DialogName"  
-        }
-
-        #Loads xaml
-        Invoke-Expression -Command "Initialize-XAMLDialog -XAMLPath '$DialogPath\$DialogName.xaml'"
-                
-        #Loads event and scriptcode
-        . "$DialogPath\$DialogName.ps1"       
+    {  
+        $Runspacehash = [hashtable]::Synchronized(@{})
+        $Runspacehash.host = $Host
+        $Runspacehash.runspace = [RunspaceFactory]::CreateRunspace()
+        $Runspacehash.runspace.ApartmentState = 'STA'
+        $Runspacehash.runspace.ThreadOptions = 'ReuseThread'
+        $Runspacehash.runspace.Open()
+        $Runspacehash.psCmd = {Import-Module PSGUI}.GetPowerShell()
+        $Runspacehash.runspace.SessionStateProxy.SetVariable('OpenWithOnlyShowFlag',$OpenWithOnlyShowFlag)
+        $Runspacehash.runspace.SessionStateProxy.SetVariable('OnlyCreateVariables',$OnlyCreateVariables)
+        $Runspacehash.runspace.SessionStateProxy.SetVariable('DialogName',$DialogName)
+        $Runspacehash.runspace.SessionStateProxy.SetVariable('DialogPath',$DialogPath)
+        $Runspacehash.psCmd.Runspace = $Runspacehash.runspace
+        $Runspacehash.Handle = $Runspacehash.psCmd.AddScript(
+            {   
+                if(!$DialogName)
+                {
+                    $DialogName = (Get-Item $DialogPath).Name
+                }
+                if ($DialogName -like 'Internal_*')
+                {
+                    $DialogPath = "$Internal_DialogFolder\$DialogName"  
+                }
         
-        #Loads functions etc.
-        Get-Item "$DialogPath\$DialogName.psm1" | Import-Module -Verbose
-        #. "$DialogPath\$DialogName.psm1"
-                  
-        if (-not $OnlyCreateVariables)
-        {
-            if ($OpenWithOnlyShowFlag)
-            {
-                Invoke-Expression -Command "`$$DialogName.Show() | Out-Null" -ErrorAction Continue
-            }
-            else
-            {
-                Invoke-Expression -Command "`$$DialogName.ShowDialog() | Out-Null" -ErrorAction Continue
-            }            
-        }        
+                #Loads XAML
+                Invoke-Expression -Command "Initialize-XAMLDialog -XAMLPath '$DialogPath\$DialogName.xaml'"
+                
+                #Loads event and scriptcode
+                . "$DialogPath\$DialogName.ps1"       
+        
+                #Loads functions etc.
+                Get-Item "$DialogPath\$DialogName.psm1" | Import-Module -Verbose
+                #. "$DialogPath\$DialogName.psm1"
+
+                if (-not $OnlyCreateVariables)
+                {
+                    if ($OpenWithOnlyShowFlag)
+                    {
+                        Invoke-Expression -Command "`$$DialogName.Show() | Out-Null" -ErrorAction Continue
+                    }
+                    else
+                    {
+                        Invoke-Expression -Command "`$$DialogName.ShowDialog() | Out-Null" -ErrorAction Continue
+                    }            
+                } 
+           }
+       ).BeginInvoke()  
     }
     End
     {
