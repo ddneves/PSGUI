@@ -1,9 +1,9 @@
 ﻿<#	
         .NOTES
         ===========================================================================
-        Created on:   	11.10.2015
+        Created on:   	04.07.2016
         Created by:   	David das Neves
-        Version:        0.1
+        Version:        0.2
         Project:        PSGUI
         Filename:       loader.psm1
         ===========================================================================
@@ -16,4 +16,7 @@
 . $PSScriptRoot\Rename-XAMLDialog.ps1
 . $PSScriptRoot\Open-XAMLDialog.ps1
 . $PSScriptRoot\Install-PSGUIModule.ps1
-. $PSScriptRoot\New-PackageByDialog.ps1
+. $PSScriptRoot\Get-InternalXAMLDIalogs.ps1
+. $PSScriptRoot\Get-EnvironmentXAMLDIalogs.ps1
+. $PSScriptRoot\Start-GUIManager.ps1
+. $PSScriptRoot\New-LinkForGUIManager.ps1

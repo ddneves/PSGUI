@@ -97,6 +97,9 @@ function Initialize-XAMLDialog
             $filename = ((Get-Item -Path $XAMLPath).Name).Split('.')[0]
  
             #Create the XAML reader using a new XML node reader
+            #$reader = [System.XML.XMLReader]::Create([System.IO.StringReader]$xmlWPF)
+            #Invoke-Expression -Command "`$Global:$filename = [System.Windows.Markup.XAMLReader]::Load($reader)"
+
             Invoke-Expression -Command "`$Global:$filename = [Windows.Markup.XamlReader]::Load((New-Object System.Xml.XmlNodeReader `$xmlWPF))"
 
             #Getting and setting the namespace of the xaml file
@@ -138,4 +141,3 @@ function Initialize-XAMLDialog
     {
     }
 }
-

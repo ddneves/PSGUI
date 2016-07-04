@@ -1,0 +1,177 @@
+﻿<!-- 
+    .NOTES
+    ===========================================================================
+        Created on:   	08.10.2015
+        Created by:   	David das Neves
+        Version:        0.1
+        Project:        GUI_Manager
+        Filename:       GUI_Manager.xaml
+    ===========================================================================
+    .DESCRIPTION
+        XAML for GUI_Manager 
+-->
+<Window x:Class="GUI_Manager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="GUI-Manager" Height="920" Width="1200" Background="#F0F0F0" BorderBrush="Black" Icon="C:\OneDrive\_Projekte\PS\PSGUI\WPFApplication\PSGUI\PSGUI\Resources\GUI_Manager.png" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="DarkBlue" />
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="DarkBlue" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="DarkBlue" />
+        </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+        <Style TargetType="GridSplitter">
+            <Setter Property="Background"  >
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Gray" Offset="1"/>
+                        <GradientStop Color="DarkBlue" Offset="0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Background" Value="DarkBlue" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Blue" />
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Black" />
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="Blue" />
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <!-- Grid settings -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1.5*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.65*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="1.4*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="0.8*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Grid Splitters -->
+        <GridSplitter Grid.Row="1" Grid.ColumnSpan="5" Height="4px" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext">
+            <GridSplitter.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Gray" Offset="0"/>
+                    <GradientStop Color="DarkBlue" Offset="1"/>
+                </LinearGradientBrush>
+            </GridSplitter.Background>
+        </GridSplitter>
+        <GridSplitter Grid.Row="0" Grid.Column="1" Width="5px" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext"/>
+        <GridSplitter Grid.Row="0" Grid.Column="3" Width="5px"  VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext"/>
+        <!-- Menu -->
+        <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Height="32" VerticalAlignment="Top" Background="DarkBlue" FontSize="16" HorizontalAlignment="Stretch"  Foreground="White" >
+            <MenuItem Header="File"  Width="40px" Height="28" Foreground="White">
+                <MenuItem x:Name="miOpen" Header="Open" />
+                <MenuItem x:Name="miOpenPath" Header="Open Path" />
+                <MenuItem x:Name="miSave" Header="Save" InputGestureText="Ctrl+S" />
+                <MenuItem x:Name="miQuit" Header="Quit" />
+            </MenuItem>
+            <MenuItem Header="Dialogs" Width="70px" Foreground="White">
+                <MenuItem x:Name="miNewDialog" Header="New Dialog" />
+                <MenuItem x:Name="miRenameDialog" Header="Rename Dialog" />
+                <MenuItem x:Name="miDeleteDialog" Header="Delete Dialog" />
+                <MenuItem x:Name="miRenderDialog" Header="Render Dialog"  InputGestureText="Ctrl+R" />
+            </MenuItem>
+            <MenuItem Header="Package" Width="70px" Foreground="White">
+                <MenuItem x:Name="miCreatePackage" Header="Create Package" />
+                <!--<MenuItem x:Name="miCreateExecutable" Header="Create Executable" />-->
+            </MenuItem>
+            <!--<MenuItem Header="Options" Width="70px" Foreground="White">
+                <MenuItem x:Name="miOptionsGUI" Header="GUI" />
+            </MenuItem>-->
+            <MenuItem x:Name="miAbout" Header="About" Width="60px" Foreground="White">
+            </MenuItem>
+        </Menu>
+
+        <!-- Dialogs  left top -->
+        <Label Grid.Column="0" Grid.Row="0" Content="Dialogs" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top" />
+        <ListView Grid.Column="0" Grid.Row="0" x:Name="lvDialogs" Margin="15,70,15,15"  >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name"  Width="210" DisplayMemberBinding="{Binding Name}"  />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Variables middle -->
+        <Label Grid.Column="2" Grid.Row="0" Content="Variables" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top"  />
+        <ListView x:Name="lvVariables" Grid.Column="2" Grid.Row="0" Margin="15,70,15,15" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name"  Width="210" DisplayMemberBinding="{Binding Name}"  />
+                    <GridViewColumn Header="Objekt" Width="250" DisplayMemberBinding="{Binding Objekt}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Events right -->
+        <Label  Grid.Column="5" Grid.Row="0" Content="Events" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top"/>
+        <ListView Grid.Column="4" Grid.Row="0" x:Name="lvEvents" Margin="15,70,25,15" >
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn>
+                            <GridViewColumnHeader Content="Name" Width="Auto" MinWidth="200px"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Name}" TextAlignment="Left" Width="Auto" FontWeight="{Binding Path=Set}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Buttons to switch the code -->
+        <WrapPanel Grid.Row="2" Grid.ColumnSpan="5">
+            <!-- Code switcher -->
+            <RadioButton x:Name="rXaml" Content="XAML" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="25,10,0,0"/>
+            <RadioButton x:Name="rCodeBehind" Content="CodeBehind" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="5,10,0,0"/>
+            <RadioButton x:Name="rFunctions" Content="Functions" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="5,10,0,0"/>
+        </WrapPanel>
+        <TextBox Grid.Row="2" Grid.ColumnSpan="5" x:Name="tbCode" TextWrapping="NoWrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="25,40,25,20" AcceptsReturn="True" AcceptsTab="True" />
+    </Grid>
+</Window>
