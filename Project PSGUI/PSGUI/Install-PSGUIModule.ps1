@@ -29,14 +29,14 @@ function Install-PSGUIModule
 
     if ((Test-Path -Path "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI") -and $CleanUpPreviousData)
     {
-        Remove-Module -Name 'PSGUI'
+        Remove-Module -Name PSGUI -Verbose -ErrorAction SilentlyContinue
         Remove-Item -Path "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI" -Recurse -Verbose
     } 
     else
     {
         if (Get-Module -Name PSGUI)
         {
-            Remove-Module -Name PSGUI -Verbose
+            Remove-Module -Name PSGUI -Verbose -ErrorAction SilentlyContinue
         }
     }
     

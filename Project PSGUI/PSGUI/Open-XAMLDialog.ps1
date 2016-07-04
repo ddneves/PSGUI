@@ -63,15 +63,20 @@ function Open-XAMLDialog
             $DialogPath = "$Environment_DialogFolder\$DialogName"  
         }
 
-        #Loads xaml
+        #Loads XAML
         Invoke-Expression -Command "Initialize-XAMLDialog -XAMLPath '$DialogPath\$DialogName.xaml'"
                 
         #Loads event and scriptcode
-        . "$DialogPath\$DialogName.ps1"       
+        if (Get-Item "$DialogPath\$DialogName.ps1"       )
+        {
+            . "$DialogPath\$DialogName.ps1" 
+        }    
         
         #Loads functions etc.
-        Get-Item "$DialogPath\$DialogName.psm1" | Import-Module -Verbose
-        #. "$DialogPath\$DialogName.psm1"
+        if (Get-Item "$DialogPath\$DialogName.psm1")
+        {
+          Import-Module "$DialogPath\$DialogName.psm1"       -ErrorAction Continue
+        }
                   
         if (-not $OnlyCreateVariables)
         {
@@ -79,10 +84,14 @@ function Open-XAMLDialog
             {
                 Invoke-Expression -Command "`$$DialogName.Show() | Out-Null" -ErrorAction Continue
             }
+            elseif($DialogName -ne 'GUI_Manager')
+            {
+                Invoke-Expression -Command "`$$DialogName.Dispatcher.InvokeAsync{ `$$DialogName.ShowDialog() }.Wait()" -ErrorAction Continue
+            }    
             else
             {
                 Invoke-Expression -Command "`$$DialogName.ShowDialog() | Out-Null" -ErrorAction Continue
-            }            
+            }        
         }        
     }
     End
