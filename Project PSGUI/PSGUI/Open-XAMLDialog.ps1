@@ -1,7 +1,7 @@
 ﻿<#	
     .NOTES
     ===========================================================================
-        Created on:   	04.07.2016
+        Created on:   	05.07.2016
         Created by:   	David das Neves
         Version:        0.2
         Project:        PSGUI
@@ -24,7 +24,7 @@ function Open-XAMLDialog
     Param
     (
         #Name of the dialog
-        [Parameter(Mandatory=$true, Position=1)]
+        [Parameter(Mandatory=$false, Position=1)]
         [Alias('Name')] 
         $DialogName,
 
@@ -43,24 +43,33 @@ function Open-XAMLDialog
         #Path of the dialog
         [Parameter(Mandatory=$false)]
         [Alias('Path')] 
-        $DialogPath = "Dialogs\Internal\$DialogName"
+        $DialogPath 
     )
 
     Begin
     {
+        if ($DialogPath -and (-not $DialogName))
+        {
+            $DialogName = $DialogPath.Split('\')[-1]
+        }    
     }
     Process
     {     
-        $InternalDialogs = Get-InternalXAMLDIalogs
-        $EnvironmentDialogs = Get-EnvironmentXAMLDialogs
+        $InternalDialogs = Get-XAMLDialogsByCategory -Category Internal
+        $ProductionDialogs = Get-XAMLDialogsByCategory -Category Production
+        $ExampleDialogs = Get-XAMLDialogsByCategory -Category Examples
 
         if ($DialogName -in $InternalDialogs)
         {
             $DialogPath = "$Internal_DialogFolder\$DialogName"  
         }
-        elseif ($DialogName -in $EnvironmentDialogs)
+        elseif ($DialogName -in $ProductionDialogs)
         {
-            $DialogPath = "$Environment_DialogFolder\$DialogName"  
+            $DialogPath = "$Production_DialogFolder\$DialogName"  
+        }        
+        elseif ($DialogName -in $ExampleDialogs)
+        {
+            $DialogPath = "$Examples_DialogFolder\$DialogName"  
         }
 
         #Loads XAML
@@ -84,14 +93,10 @@ function Open-XAMLDialog
             {
                 Invoke-Expression -Command "`$$DialogName.Show() | Out-Null" -ErrorAction Continue
             }
-            elseif($DialogName -ne 'GUI_Manager')
+            else
             {
                 Invoke-Expression -Command "`$$DialogName.Dispatcher.InvokeAsync{ `$$DialogName.ShowDialog() }.Wait()" -ErrorAction Continue
             }    
-            else
-            {
-                Invoke-Expression -Command "`$$DialogName.ShowDialog() | Out-Null" -ErrorAction Continue
-            }        
         }        
     }
     End
