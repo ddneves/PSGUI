@@ -4,16 +4,16 @@
         Created on:   	04.10.2015
         Created by:   	David das Neves
         Version:        0.1
-        Project:        GUI_Manager
-        Filename:       GUI_Manager.xaml
+        Project:        PSGUI_Manager
+        Filename:       PSGUI_Manager.xaml
     ===========================================================================
     .DESCRIPTION
-        XAML for GUI_Manager 
+        XAML for PSGUI_Manager 
 -->
-    <Window x:Class="GUI_Manager.MainWindow"
+    <Window x:Class="PSGUI_Manager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="GUI-Manager" Height="920" Width="1200" Background="#F0F0F0" BorderBrush="Black" Icon="C:\Users\pSyKo\OneDrive\_Projekte\PS\WPFApplication\PSGUI\PSGUI\Resources\GUI_Manager.png">
+        Title="PSGUI-Manager" Height="920" Width="1200" Background="#F0F0F0" BorderBrush="Black" Icon="C:\Users\pSyKo\OneDrive\_Projekte\PS\WPFApplication\PSGUI\PSGUI\Resources\PSGUI_Manager.png">
 
     <!-- Style settings-->
     <Window.Resources>
@@ -123,7 +123,7 @@
             </Button>
             <Button x:Name="bShowDialog"  HorizontalAlignment="Left" Width="50" Height="50" Background="Transparent" BorderBrush="Transparent"  Style="{x:Null}">
                 <Viewbox Width="42px" Height="42px">
-                    <Image Source="C:\Users\pSyKo\OneDrive\_Projekte\PS\PSGUI\GUI_Manager\Resources\Actions-arrow-right-icon.png" />
+                    <Image Source="C:\Users\pSyKo\OneDrive\_Projekte\PS\PSGUI\PSGUI_Manager\Resources\Actions-arrow-right-icon.png" />
                 </Viewbox>
             </Button>
             <Button x:Name="bSaveCode"  HorizontalAlignment="Left"  Margin="0,20,0,0"  Width="50" Height="50" Background="Transparent" BorderBrush="Transparent" Style="{x:Null}">

@@ -2,7 +2,7 @@
 <#	
         .NOTES
         ===========================================================================
-        Created on:   	04.07.2016
+        Created on:   	06.07.2016
         Created by:   	David das Neves
         Version:        0.2
         Project:        PSGUI
@@ -40,6 +40,6 @@ function Install-PSGUIModule
         }
     }
     
-    Copy-Item '.\Project PSGUI\PSGUI\'  -Destination "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI" -Recurse -Force
+    Copy-Item -Path '.\Project PSGUI\PSGUI\'  -Destination "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI" -Recurse -Force
     Import-Module -Name PSGUI -Verbose
 }

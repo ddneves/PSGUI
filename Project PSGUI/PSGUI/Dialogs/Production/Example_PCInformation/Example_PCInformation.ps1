@@ -4,7 +4,7 @@
         Created on:   	04.10.2015
         Created by:   	David das Neves
         Version:        0.1
-        Project:        PSGUI - GUI_Manager
+        Project:        PSGUI - PSGUI_Manager
         Filename:       Example_PCInformation.ps1
     ===========================================================================
     .DESCRIPTION

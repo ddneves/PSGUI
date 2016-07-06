@@ -9,19 +9,19 @@
         Filename:       ExecByShortcut.ps1
         ===========================================================================
         .DESCRIPTION
-        Starts the GUI_Manager. Used for starting with a shortcut.
+        Starts the PSGUI_Manager. Used for starting with a shortcut.
 #> 
 
-function Start-GUIManager
+function Start-PSGUIManager
 {
     <#
             .SYNOPSIS
-            Starts the GUI-Manager, which is included in the module PSGUI
+            Starts the PSGUI-Manager, which is included in the module PSGUI
 
             .EXAMPLE
-            Start-GUIManager
+            Start-PSGUIManager
     #>
     Open-XAMLDialog -DialogName ('Internal_Start')
-    Open-XAMLDialog -DialogName 'GUI_Manager' -DialogPath "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI\GUI_Manager"
+    Open-XAMLDialog -DialogName 'PSGUI_Manager' -DialogPath "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI\PSGUI_Manager"
 }
 

@@ -17,6 +17,6 @@
 . $PSScriptRoot\Rename-XAMLDialog.ps1
 . $PSScriptRoot\Open-XAMLDialog.ps1
 . $PSScriptRoot\Install-PSGUIModule.ps1
-. $PSScriptRoot\Start-GUIManager.ps1
-. $PSScriptRoot\New-LinkForGUIManager.ps1
+. $PSScriptRoot\Start-PSGUIManager.ps1
+. $PSScriptRoot\New-LinkForPSGUIManager.ps1
 . $PSScriptRoot\Export-Dialogs.ps1

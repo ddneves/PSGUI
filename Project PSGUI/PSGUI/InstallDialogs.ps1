@@ -33,7 +33,7 @@ Where-Object -FilterScript {
 foreach ($dialogName in $newDialogNames)
 {
     $TargetFile = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" 
-    $GUIManagerPath = "$env:UserProfile\Documents\WindowsPowerShell\GUI_Manager\"
+    $GUIManagerPath = "$env:UserProfile\Documents\WindowsPowerShell\PSGUI_Manager\"
     $ShortcutFile = "$env:UserProfile\Desktop\$dialogName.lnk"
     $WScriptShell = New-Object -ComObject WScript.Shell
     $Shortcut = $WScriptShell.CreateShortcut($ShortcutFile)

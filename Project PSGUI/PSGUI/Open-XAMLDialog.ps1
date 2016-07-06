@@ -1,5 +1,4 @@
-﻿
-#requires -Version 3 
+﻿#requires -Version 3 
 <#	
         .NOTES
         ===========================================================================
@@ -22,7 +21,7 @@ function Open-XAMLDialog
             .EXAMPLE
             Open-XAMLDialog "MyForm"
             .EXAMPLE
-            Open-XAMLDialog -DialogPath "C:\Project PSGUI\PSGUI\GUI_Manager"
+            Open-XAMLDialog -DialogPath "C:\Project PSGUI\PSGUI\PSGUI_Manager"
     #>
     [CmdletBinding()]
     Param
@@ -93,11 +92,11 @@ function Open-XAMLDialog
         {
             if ($OpenWithOnlyShowFlag)
             {
-                $null = $((Get-Variable -Name $DialogName).Value).Show()
+                [void]$((Get-Variable -Name $DialogName).Value).Show()
             }
             else
             {
-                $((Get-Variable -Name $DialogName).Value).Dispatcher.InvokeAsync{
+                [void]$((Get-Variable -Name $DialogName).Value).Dispatcher.InvokeAsync{
                     $((Get-Variable -Name $DialogName).Value).ShowDialog() 
                 }.Wait()
             }    
