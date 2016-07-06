@@ -20,7 +20,7 @@
 
 #===========================================================================
 #region PreFilling
-$GUI_Manager_DialogFolder = "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI\Dialogs\Environment"
+$GUI_Manager_DialogFolder = "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI\Dialogs\Production"
 
 $GUI_Manager.Add_Loaded(
     {
@@ -31,6 +31,11 @@ $GUI_Manager.Add_Loaded(
             $null = $GUI_Manager_lvDialogs.Items.Add($param)
             $GUI_Manager.Activate()            
         }
+        $AllDialogsPaths = Get-ChildItem -Path "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI\Dialogs\" -Directory
+        foreach ($OneDialogPath in $AllDialogsPaths)
+        {
+            $GUI_Manager_cbDialogFolder
+        }   
     }
 )
 

@@ -131,8 +131,14 @@
         </Menu>
 
         <!-- Dialogs  left top -->
-        <Label Grid.Column="0" Grid.Row="0" Content="Dialogs" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top" />
-        <ListView Grid.Column="0" Grid.Row="0" x:Name="lvDialogs" Margin="15,70,15,15"  >
+        <!-- Buttons to switch the code -->
+        <WrapPanel Grid.Row="0" Margin="10,35,0,0">
+            <ComboBox x:Name="cbDialogFolders" Width="120" >
+
+            </ComboBox>
+        </WrapPanel>
+        <Label Grid.Column="0" Grid.Row="0" Content="Dialogs" HorizontalAlignment="Left" Margin="15,75,0,0" VerticalAlignment="Top" />
+        <ListView Grid.Column="0" Grid.Row="0" x:Name="lvDialogs" Margin="15,100,15,15"  >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name"  Width="210" DisplayMemberBinding="{Binding Name}"  />

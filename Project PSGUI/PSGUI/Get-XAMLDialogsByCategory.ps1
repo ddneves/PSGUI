@@ -3,7 +3,7 @@
     ===========================================================================
         Created on:   	04.07.2016
         Created by:   	David das Neves
-        Version:        0.1
+        Version:        0.2
         Project:        PSGUI
         Filename:       Get-XAMLDialogsByCategory.ps1
     ===========================================================================
@@ -14,7 +14,7 @@ function Get-XAMLDialogsByCategory
 {
     <#
         .Synopsis
-        Renames a dialog and its containing functions.        
+        Gets the XAML dialogs defined by a category.      
         .EXAMPLE
         Get-XAMLDialogsByCategory
     #>
@@ -22,8 +22,7 @@ function Get-XAMLDialogsByCategory
     Param
     (
         #Name of the dialog
-        [Parameter(Mandatory=$true, Position=1)]
-        [Alias('Cat')] 
+        [Parameter(Mandatory=$true, Position=0)]
         $Category
     )
     Begin

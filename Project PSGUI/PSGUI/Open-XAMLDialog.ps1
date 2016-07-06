@@ -1,30 +1,34 @@
-﻿<#	
-    .NOTES
-    ===========================================================================
-        Created on:   	05.07.2016
+﻿
+#requires -Version 3 
+<#	
+        .NOTES
+        ===========================================================================
+        Created on:   	06.07.2016
         Created by:   	David das Neves
         Version:        0.2
         Project:        PSGUI
         Filename:       Open-XAMLDialog.ps1
-    ===========================================================================
-    .DESCRIPTION
+        ===========================================================================
+        .DESCRIPTION
         Function from the PSGUI module.
 #> 
 function Open-XAMLDialog
 {
     <#
-        .Synopsis
-        Opens the dialog.
-        .DESCRIPTION
-        Loads dialog with xaml, events and code and shows it up as a dialog.
-        .EXAMPLE
-        Open-XAMLDialog "MyForm"
+            .Synopsis
+            Opens the dialog.
+            .DESCRIPTION
+            Loads dialog with xaml, events and code and shows it up as a dialog.
+            .EXAMPLE
+            Open-XAMLDialog "MyForm"
+            .EXAMPLE
+            Open-XAMLDialog -DialogPath "C:\Project PSGUI\PSGUI\GUI_Manager"
     #>
     [CmdletBinding()]
     Param
     (
         #Name of the dialog
-        [Parameter(Mandatory=$false, Position=1)]
+        [Parameter(Mandatory = $false, Position = 0)]
         [Alias('Name')] 
         $DialogName,
 
@@ -41,7 +45,7 @@ function Open-XAMLDialog
         $OpenWithOnlyShowFlag = $false,
 
         #Path of the dialog
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false)]
         [Alias('Path')] 
         $DialogPath 
     )
@@ -50,52 +54,52 @@ function Open-XAMLDialog
     {
         if ($DialogPath -and (-not $DialogName))
         {
-            $DialogName = $DialogPath.Split('\')[-1]
+            $DialogName = [System.IO.DirectoryInfo]::new($DialogPath).Name
         }    
     }
     Process
     {     
-        $InternalDialogs = Get-XAMLDialogsByCategory -Category Internal
-        $ProductionDialogs = Get-XAMLDialogsByCategory -Category Production
-        $ExampleDialogs = Get-XAMLDialogsByCategory -Category Examples
-
-        if ($DialogName -in $InternalDialogs)
+        if (-not $DialogPath -and (-not $DialogPath -or -not $(Get-Item $DialogPath)))
         {
-            $DialogPath = "$Internal_DialogFolder\$DialogName"  
-        }
-        elseif ($DialogName -in $ProductionDialogs)
-        {
-            $DialogPath = "$Production_DialogFolder\$DialogName"  
-        }        
-        elseif ($DialogName -in $ExampleDialogs)
-        {
-            $DialogPath = "$Examples_DialogFolder\$DialogName"  
+            $AllDialogsPaths = Get-ChildItem -Path "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI\Dialogs\" -Directory
+            foreach ($OneDialogPath in $AllDialogsPaths)
+            {
+                if ($DialogName -in (Get-ChildItem -Path $($OneDialogPath.FullName)).Name)
+                {
+                    $DialogPath = [System.IO.Path]::Combine($OneDialogPath.FullName, $DialogName)
+                    break
+                }
+            }        
         }
 
         #Loads XAML
-        Invoke-Expression -Command "Initialize-XAMLDialog -XAMLPath '$DialogPath\$DialogName.xaml'"
+        Initialize-XAMLDialog -XAMLPath ([System.IO.Path]::Combine($DialogPath,"$DialogName.xaml"))
                 
         #Loads event and scriptcode
-        if (Get-Item "$DialogPath\$DialogName.ps1"       )
+        $scriptfile = ([System.IO.Path]::Combine($DialogPath,"$DialogName.ps1"))
+        if (Get-Item -Path ($scriptfile))
         {
-            . "$DialogPath\$DialogName.ps1" 
+            . $scriptfile
         }    
         
+        $additionalScriptfile = ([System.IO.Path]::Combine($DialogPath,"$DialogName.psm1"))
         #Loads functions etc.
-        if (Get-Item "$DialogPath\$DialogName.psm1")
+        if (Get-Item -Path $additionalScriptfile)
         {
-          Import-Module "$DialogPath\$DialogName.psm1"       -ErrorAction Continue
+            Import-Module -Name $additionalScriptfile -ErrorAction Continue
         }
                   
         if (-not $OnlyCreateVariables)
         {
             if ($OpenWithOnlyShowFlag)
             {
-                Invoke-Expression -Command "`$$DialogName.Show() | Out-Null" -ErrorAction Continue
+                $null = $((Get-Variable -Name $DialogName).Value).Show()
             }
             else
             {
-                Invoke-Expression -Command "`$$DialogName.Dispatcher.InvokeAsync{ `$$DialogName.ShowDialog() }.Wait()" -ErrorAction Continue
+                $((Get-Variable -Name $DialogName).Value).Dispatcher.InvokeAsync{
+                    $((Get-Variable -Name $DialogName).Value).ShowDialog() 
+                }.Wait()
             }    
         }        
     }
