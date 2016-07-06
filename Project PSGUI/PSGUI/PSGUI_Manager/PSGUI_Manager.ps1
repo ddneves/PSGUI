@@ -177,16 +177,18 @@ $PSGUI_Manager_miRenameDialog.Add_Click(
 
 $PSGUI_Manager_miDeleteDialog.Add_Click(
     {
-        Open-XAMLDialog -DialogName ('Internal_AskIfSureInput')  
-
-        Rename-XAMLDialog -DialogName ($PSGUI_Manager_lvDialogs.SelectedValue.Name) -DialogPath $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -NewDialogName $Returnvalue_Internal_UserInput
-
-        $PSGUI_Manager_lvDialogs.Items.Clear()
-        Get-ChildItem -Path $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
-            $param = [PSCustomObject]@{
-                Name = $_.Name
-            } 
-            $PSGUI_Manager_lvDialogs.Items.Add($param)        
+        #TODO Open-XAMLDialog -DialogName ('Internal_AskIfSureInput')  
+        
+        if ($PSGUI_Manager_lvDialogs.SelectedValue)
+        {
+            Remove-Item -Path ([System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name))) -Recurse
+            $PSGUI_Manager_lvDialogs.Items.Clear()
+            Get-ChildItem -Path $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
+                $param = [PSCustomObject]@{
+                    Name = $_.Name
+                } 
+                $PSGUI_Manager_lvDialogs.Items.Add($param)        
+            }
         }
     }
 )

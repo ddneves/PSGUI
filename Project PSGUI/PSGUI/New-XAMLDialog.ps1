@@ -34,7 +34,11 @@ function New-XAMLDialog
         #Name of the dialog
         [Parameter(Mandatory = $false, Position = 2)]
         [Alias('Path')] 
-        $DialogPath = $Internal_DialogFolder
+        $DialogPath,
+
+        #Name of the internal dialogpath
+        [Parameter(Mandatory = $false, Position = 3)]
+        $Internal_DialogFolder = "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI\Dialogs\Internal"
     )
 
     Begin

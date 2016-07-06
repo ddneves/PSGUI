@@ -104,8 +104,8 @@
         <!-- Menu -->
         <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Height="32" VerticalAlignment="Top" Background="DarkBlue" FontSize="16" HorizontalAlignment="Stretch"  Foreground="White" >
             <MenuItem Header="File"  Width="40px" Height="28" Foreground="White">
-                <MenuItem x:Name="miOpen" Header="Open" Visibility="Hidden"/>
-                <MenuItem x:Name="miOpenPath" Header="Open Path" Visibility="Hidden" />
+                <MenuItem x:Name="miOpen" Header="Open" Visibility="Collapsed"/>
+                <MenuItem x:Name="miOpenPath" Header="Open Path" Visibility="Collapsed" />
                 <MenuItem x:Name="miSave" Header="Save" InputGestureText="Ctrl+S" />
                 <MenuItem x:Name="miQuit" Header="Quit" />
             </MenuItem>
@@ -185,7 +185,7 @@
             <RadioButton x:Name="rFunctions" Content="Functions" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="5,10,0,0"/>
         </WrapPanel>
         <WrapPanel Grid.Row="2" Grid.ColumnSpan="5" HorizontalAlignment="Right">
-            <RadioButton x:Name="rOpenSpecificDialogFolder" Content="Open Folder Path" Width="120" Height="24px" Margin="5,10,25,0" HorizontalAlignment="Right" Grid.Row="2" Grid.ColumnSpan="5"/>
+            <RadioButton x:Name="rOpenSpecificDialogFolder" Content="Open Folder Path" Width="120" Height="24px" Margin="5,10,25,0" HorizontalAlignment="Right" Grid.Row="2" Grid.ColumnSpan="5" Visibility="Collapsed"/>
         </WrapPanel>
         <TextBox Grid.Row="2" Grid.ColumnSpan="5" x:Name="tbCode" TextWrapping="NoWrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="25,40,25,20" AcceptsReturn="True" AcceptsTab="True" />
     </Grid>
