@@ -82,11 +82,12 @@
             <RowDefinition Height="1.5*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.65*" />
+            <ColumnDefinition Width="0.43*" />
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="1.4*" />
+            <ColumnDefinition Width="0.94*" />
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="0.8*" />
+            <ColumnDefinition Width="0.55*" />
+            <!--<ColumnDefinition Width="0.2*" />-->            
         </Grid.ColumnDefinitions>
 
         <!-- Grid Splitters -->
@@ -113,7 +114,7 @@
                 <MenuItem x:Name="miRenameDialog" Header="Rename Dialog" />
                 <MenuItem x:Name="miDeleteDialog" Header="Delete Dialog" />
                 <MenuItem x:Name="miDebug" Header="Debug Dialog" />
-                <MenuItem x:Name="miRenderDialog" Header="Render Dialog"  InputGestureText="Ctrl+R" />                
+                <MenuItem x:Name="miRenderDialog" Header="Render Dialog"  InputGestureText="Ctrl+R" />
             </MenuItem>
             <!--<MenuItem Header="Package" Width="70px" Foreground="White">
                 <MenuItem x:Name="miCreatePackage" Header="Create Package" />
@@ -122,7 +123,7 @@
             <MenuItem Header="Export" Width="60px" Foreground="White">
                 <MenuItem x:Name="miExportDialog" Header="Export Dialog" />
                 <!--<MenuItem x:Name="miCreateExecutable" Header="Create Executable" />-->
-            </MenuItem>            
+            </MenuItem>
             <!--<MenuItem Header="Options" Width="70px" Foreground="White">
                 <MenuItem x:Name="miOptionsGUI" Header="GUI" />
             </MenuItem>-->
@@ -132,13 +133,13 @@
 
         <!-- Dialogs  left top -->
         <!-- Buttons to switch the code -->
-        <WrapPanel Grid.Row="0" Margin="10,35,0,0">
-            <ComboBox x:Name="cbDialogFolders" Width="120" >
-
+        <WrapPanel Grid.Column="0" Grid.Row="0" Margin="15,75,15,15">            
+            <ComboBox x:Name="cbDialogFolders" Width="Auto" Height="24">
             </ComboBox>
+            <RadioButton x:Name="bOpenDialogFolder" Content="Open" GroupName="ContentSwitcher"  Width="60" Height="24px" Margin="5,0,0,0"/>            
         </WrapPanel>
-        <Label Grid.Column="0" Grid.Row="0" Content="Dialogs" HorizontalAlignment="Left" Margin="15,75,0,0" VerticalAlignment="Top" />
-        <ListView Grid.Column="0" Grid.Row="0" x:Name="lvDialogs" Margin="15,100,15,15"  >
+        <Label Grid.Column="0" Grid.Row="0" Content="Dialogs" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top" />
+        <ListView Grid.Column="0" Grid.Row="0" x:Name="lvDialogs" Margin="15,110,15,15"  >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name"  Width="210" DisplayMemberBinding="{Binding Name}"  />
@@ -148,7 +149,7 @@
 
         <!-- Variables middle -->
         <Label Grid.Column="2" Grid.Row="0" Content="Variables" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top"  />
-        <ListView x:Name="lvVariables" Grid.Column="2" Grid.Row="0" Margin="15,70,15,15" >
+        <ListView x:Name="lvVariables" Grid.Column="2" Grid.Row="0" Margin="15,75,15,15" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name"  Width="210" DisplayMemberBinding="{Binding Name}"  />
@@ -159,7 +160,7 @@
 
         <!-- Events right -->
         <Label  Grid.Column="5" Grid.Row="0" Content="Events" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top"/>
-        <ListView Grid.Column="4" Grid.Row="0" x:Name="lvEvents" Margin="15,70,25,15" >
+        <ListView Grid.Column="4" Grid.Row="0" x:Name="lvEvents" Margin="15,75,25,15" >
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
@@ -181,8 +182,11 @@
             <!-- Code switcher -->
             <RadioButton x:Name="rXaml" Content="XAML" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="25,10,0,0"/>
             <RadioButton x:Name="rCodeBehind" Content="CodeBehind" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="5,10,0,0"/>
-            <RadioButton x:Name="rFunctions" Content="Functions" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="5,10,0,0"/>
+            <RadioButton x:Name="rFunctions" Content="Functions" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="5,10,0,0"/>            
         </WrapPanel>
+        <WrapPanel Grid.Row="2" Grid.ColumnSpan="5" HorizontalAlignment="Right">
+            <RadioButton x:Name="rOpenSpecificDialogFolder" Content="Open Folder Path" Width="120" Height="24px" Margin="5,10,25,0" HorizontalAlignment="Right" Grid.Row="2" Grid.ColumnSpan="5"/>
+        </WrapPanel>        
         <TextBox Grid.Row="2" Grid.ColumnSpan="5" x:Name="tbCode" TextWrapping="NoWrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="25,40,25,20" AcceptsReturn="True" AcceptsTab="True" />
     </Grid>
 </Window>

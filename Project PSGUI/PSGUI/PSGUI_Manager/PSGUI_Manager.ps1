@@ -93,7 +93,7 @@ $PSGUI_Manager_miAbout.Add_Click(
 $PSGUI_Manager_cbDialogFolders.Add_SelectionChanged(
     {        
         [void]$PSGUI_Manager_lvDialogs.Items.Clear()
-        Get-ChildItem $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
+        Get-ChildItem -Path $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
             $param = [PSCustomObject]@{
                 Name = $_.Name
             }             
@@ -111,7 +111,7 @@ $PSGUI_Manager_miOpen.Add_Click(
         {     
             $PSGUI_Manager_DialogFolder = "$Returnvalue_Internal_UserInput"
             $PSGUI_Manager_lvDialogs.Items.Clear()
-            Get-ChildItem $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
+            Get-ChildItem -Path $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
                 $param = [PSCustomObject]@{
                     Name = $_.Name
                 } 
@@ -127,7 +127,7 @@ $PSGUI_Manager_miOpenPath.Add_Click(
         {     
             $PSGUI_Manager_DialogFolder = "$Returnvalue_Internal_UserInput"
             $PSGUI_Manager_lvDialogs.Items.Clear()
-            Get-ChildItem $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
+            Get-ChildItem -Path $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
                 $param = [PSCustomObject]@{
                     Name = $_.Name
                 } 
@@ -143,7 +143,7 @@ $PSGUI_Manager_miNewDialog.Add_Click(
         {     
             New-XAMLDialog -DialogName $Returnvalue_Internal_UserInput -DialogPath $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname
             $PSGUI_Manager_lvDialogs.Items.Clear()
-            Get-ChildItem $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
+            Get-ChildItem -Path $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
                 $param = [PSCustomObject]@{
                     Name = $_.Name
                 } 
@@ -161,7 +161,7 @@ $PSGUI_Manager_miRenameDialog.Add_Click(
             Rename-XAMLDialog -DialogName ($PSGUI_Manager_lvDialogs.SelectedValue.Name) -DialogPath $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -NewDialogName $Returnvalue_Internal_UserInput
 
             $PSGUI_Manager_lvDialogs.Items.Clear()
-            Get-ChildItem $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
+            Get-ChildItem -Path $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
                 $param = [PSCustomObject]@{
                     Name = $_.Name
                 } 
@@ -178,7 +178,7 @@ $PSGUI_Manager_miDeleteDialog.Add_Click(
         Rename-XAMLDialog -DialogName ($PSGUI_Manager_lvDialogs.SelectedValue.Name) -DialogPath $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -NewDialogName $Returnvalue_Internal_UserInput
 
         $PSGUI_Manager_lvDialogs.Items.Clear()
-        Get-ChildItem $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
+        Get-ChildItem -Path $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
             $param = [PSCustomObject]@{
                 Name = $_.Name
             } 
@@ -201,14 +201,34 @@ $PSGUI_Manager_miRenderDialog.Add_Click(
 
 $PSGUI_Manager_miDebug.Add_Click(
     {        
-        #new file for debugging code line
-        #Set-Content "C:\Temp\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)_Debug.ps1" '# Debugging lines' 
-        #Add-Content "C:\Temp\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)_Debug.ps1" '# Only creating all variables for data analysis'
-        #Add-Content "C:\Temp\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)_Debug.ps1" "Open-XAMLDialog -DialogName $($PSGUI_Manager_lvDialogs.SelectedValue.Name) -OnlyCreateVariables"
-        #Add-Content "C:\Temp\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)_Debug.ps1" '# Show dialog in debug mode - breakpoints must be set before starting the GUI'
-        #Add-Content "C:\Temp\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)_Debug.ps1"  "Open-XAMLDialog -DialogName $($PSGUI_Manager_lvDialogs.SelectedValue.Name)" 
-        #C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe -File  "$($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)\$($PSGUI_Manager_lvDialogs.SelectedValue.Name).ps1","$($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)\$($PSGUI_Manager_lvDialogs.SelectedValue.Name).psm1","C:\Temp\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)_Debug.ps1"
-        C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe -File  "$($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)\$($PSGUI_Manager_lvDialogs.SelectedValue.Name).ps1","$($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)\$($PSGUI_Manager_lvDialogs.SelectedValue.Name).psm1","$($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)\$($PSGUI_Manager_lvDialogs.SelectedValue.Name)_Debug.ps1"
+        $fileDebugScript = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name).ps1")
+        $fileDebugModule = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name).psm1")
+        $fileDebugAssist = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name)_Debug.ps1")
+        if (-not [System.IO.File]::Exists($fileDebugAssist))
+        {
+            #new file for debugging code line
+            [string]$debugFileContent = @'
+<#	
+    .NOTES
+    ===========================================================================
+        Debugging file with preset lines to start debugging.
+    ===========================================================================
+#>
+
+ 
+#Debugging lines
+
+#Only creating all variables for data analysis
+Open-XAMLDialog -DialogName Example_PCInformation -OnlyCreateVariables
+
+#Show dialog in debug mode - breakpoints must be set before starting the GUI
+Open-XAMLDialog -DialogName Example_PCInformation
+'@
+            $debugFileContent = $debugFileContent.Replace('%DIALOG%', $($PSGUI_Manager_lvDialogs.SelectedValue.Name))  
+            $debugFileContent | Set-Content $fileDebugAssist   
+        }
+        # open all relevant files in ISE.
+        C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe -File "$fileDebugScript, $fileDebugModule, $fileDebugAssist"
     }
 )
 

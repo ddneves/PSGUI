@@ -1,4 +1,4 @@
-# PSGUI with PSGUI-Manager
+﻿# PSGUI with PSGUI-Manager
 
 ########################################################################
 ##
@@ -10,6 +10,15 @@
 ##  http://powerintheshell.com/psgui-first-start-3/
 ##
 ########################################################################
+
+########################################################################
+####  HOWTO
+########################################################################
+
+After the installation a link to the PSGUIManager will be placed on the users desktop.
+The GUI-Manager can also be start with the Powershell command:
+
+ Start-PSGUIManager
 
 
 ########################################################################
@@ -25,7 +34,7 @@ Many times there had been administrators, customers and friends who asked for a 
 Though you should never forget – by adding a GUI to a module / function of yours you can prevent lots of input errors by the user. The user gets happy because he can click and sees a wonderful design and you can add an additional abstraction layer preventing lots of headaches.
 
 
-###Aims
+### Aims
 
 The primary aims with this project had been:
 
