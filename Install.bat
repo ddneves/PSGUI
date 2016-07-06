@@ -12,6 +12,6 @@
 @echo off
 :: Installation of PSGUI
 powershell -ExecutionPolicy ByPass -File "%cd%\InstallPSGUI.ps1"
-notepad README.md
-notepad LICENSE
+:: notepad README.md
+:: notepad LICENSE
 pause

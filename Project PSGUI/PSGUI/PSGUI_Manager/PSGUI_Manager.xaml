@@ -1,7 +1,7 @@
 ﻿<!-- 
     .NOTES
     ===========================================================================
-        Created on:   	05.07.2016
+        Created on:   	06.07.2016
         Created by:   	David das Neves
         Version:        0.2
         Project:        PSGUI_Manager
@@ -87,7 +87,7 @@
             <ColumnDefinition Width="0.94*" />
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="0.55*" />
-            <!--<ColumnDefinition Width="0.2*" />-->            
+            <!--<ColumnDefinition Width="0.2*" />-->
         </Grid.ColumnDefinitions>
 
         <!-- Grid Splitters -->
@@ -104,8 +104,8 @@
         <!-- Menu -->
         <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Height="32" VerticalAlignment="Top" Background="DarkBlue" FontSize="16" HorizontalAlignment="Stretch"  Foreground="White" >
             <MenuItem Header="File"  Width="40px" Height="28" Foreground="White">
-                <MenuItem x:Name="miOpen" Header="Open" />
-                <MenuItem x:Name="miOpenPath" Header="Open Path" />
+                <MenuItem x:Name="miOpen" Header="Open" Visibility="Hidden"/>
+                <MenuItem x:Name="miOpenPath" Header="Open Path" Visibility="Hidden" />
                 <MenuItem x:Name="miSave" Header="Save" InputGestureText="Ctrl+S" />
                 <MenuItem x:Name="miQuit" Header="Quit" />
             </MenuItem>
@@ -113,14 +113,14 @@
                 <MenuItem x:Name="miNewDialog" Header="New Dialog" />
                 <MenuItem x:Name="miRenameDialog" Header="Rename Dialog" />
                 <MenuItem x:Name="miDeleteDialog" Header="Delete Dialog" />
-                <MenuItem x:Name="miDebug" Header="Debug Dialog" />
+                <MenuItem x:Name="miDebugDialog" Header="Debug Dialog"  InputGestureText="Ctrl+D" />
                 <MenuItem x:Name="miRenderDialog" Header="Render Dialog"  InputGestureText="Ctrl+R" />
             </MenuItem>
             <!--<MenuItem Header="Package" Width="70px" Foreground="White">
                 <MenuItem x:Name="miCreatePackage" Header="Create Package" />
                 <MenuItem x:Name="miCreateExecutable" Header="Create Executable" />
             </MenuItem>-->
-            <MenuItem Header="Export" Width="60px" Foreground="White">
+            <MenuItem Header="Export" Width="60px" Foreground="White" Visibility="Collapsed">
                 <MenuItem x:Name="miExportDialog" Header="Export Dialog" />
                 <!--<MenuItem x:Name="miCreateExecutable" Header="Create Executable" />-->
             </MenuItem>
@@ -133,10 +133,10 @@
 
         <!-- Dialogs  left top -->
         <!-- Buttons to switch the code -->
-        <WrapPanel Grid.Column="0" Grid.Row="0" Margin="15,75,15,15">            
+        <WrapPanel Grid.Column="0" Grid.Row="0" Margin="15,75,15,15">
             <ComboBox x:Name="cbDialogFolders" Width="Auto" Height="24">
             </ComboBox>
-            <RadioButton x:Name="bOpenDialogFolder" Content="Open" GroupName="ContentSwitcher"  Width="60" Height="24px" Margin="5,0,0,0"/>            
+            <RadioButton x:Name="bOpenDialogFolder" Content="Open" Width="60" Height="24px" Margin="5,0,0,0"/>
         </WrapPanel>
         <Label Grid.Column="0" Grid.Row="0" Content="Dialogs" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top" />
         <ListView Grid.Column="0" Grid.Row="0" x:Name="lvDialogs" Margin="15,110,15,15"  >
@@ -182,11 +182,11 @@
             <!-- Code switcher -->
             <RadioButton x:Name="rXaml" Content="XAML" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="25,10,0,0"/>
             <RadioButton x:Name="rCodeBehind" Content="CodeBehind" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="5,10,0,0"/>
-            <RadioButton x:Name="rFunctions" Content="Functions" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="5,10,0,0"/>            
+            <RadioButton x:Name="rFunctions" Content="Functions" GroupName="ContentSwitcher"  Width="90" Height="24px" Margin="5,10,0,0"/>
         </WrapPanel>
         <WrapPanel Grid.Row="2" Grid.ColumnSpan="5" HorizontalAlignment="Right">
             <RadioButton x:Name="rOpenSpecificDialogFolder" Content="Open Folder Path" Width="120" Height="24px" Margin="5,10,25,0" HorizontalAlignment="Right" Grid.Row="2" Grid.ColumnSpan="5"/>
-        </WrapPanel>        
+        </WrapPanel>
         <TextBox Grid.Row="2" Grid.ColumnSpan="5" x:Name="tbCode" TextWrapping="NoWrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="25,40,25,20" AcceptsReturn="True" AcceptsTab="True" />
     </Grid>
 </Window>

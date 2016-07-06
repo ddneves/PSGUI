@@ -52,6 +52,10 @@ $PSGUI_Manager.Add_Closed(
 
 $PSGUI_Manager.Add_PreviewKeyDown(
     {
+        if(([System.Windows.Input.Keyboard]::IsKeyDown('Ctrl') -eq $true) -and $_.Key -eq 'D') 
+        {
+            $PSGUI_Manager_miDebugDialog.RaiseEvent((New-Object -TypeName System.Windows.RoutedEventArgs -ArgumentList $([System.Windows.Controls.MenuItem]::ClickEvent)))
+        }
         if(([System.Windows.Input.Keyboard]::IsKeyDown('Ctrl') -eq $true) -and $_.Key -eq 'S') 
         {
             $PSGUI_Manager_miSave.RaiseEvent((New-Object -TypeName System.Windows.RoutedEventArgs -ArgumentList $([System.Windows.Controls.MenuItem]::ClickEvent)))
@@ -187,7 +191,11 @@ $PSGUI_Manager_miDeleteDialog.Add_Click(
     }
 )
 
-#ButtonClick
+$PSGUI_Manager_bOpenDialogFolder.Add_Click(
+    {
+        Explorer.exe $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname
+    }
+)
 $PSGUI_Manager_miRenderDialog.Add_Click(
     {
         if ($PSGUI_Manager_lvDialogs.SelectedValue)
@@ -199,15 +207,17 @@ $PSGUI_Manager_miRenderDialog.Add_Click(
     }
 )
 
-$PSGUI_Manager_miDebug.Add_Click(
-    {        
-        $fileDebugScript = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name).ps1")
-        $fileDebugModule = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name).psm1")
-        $fileDebugAssist = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name)_Debug.ps1")
-        if (-not [System.IO.File]::Exists($fileDebugAssist))
+$PSGUI_Manager_miDebugDialog.Add_Click(
+    {    
+        if ($PSGUI_Manager_lvDialogs.SelectedValue)
         {
-            #new file for debugging code line
-            [string]$debugFileContent = @'
+            $fileDebugScript = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name).ps1")
+            $fileDebugModule = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name).psm1")
+            $fileDebugAssist = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name)_Debug.ps1")
+            if (-not [System.IO.File]::Exists($fileDebugAssist))
+            {
+                #new file for debugging code line
+                [string]$debugFileContent = @'
 <#	
     .NOTES
     ===========================================================================
@@ -216,19 +226,20 @@ $PSGUI_Manager_miDebug.Add_Click(
 #>
 
  
-#Debugging lines
+    #Debugging lines
 
-#Only creating all variables for data analysis
-Open-XAMLDialog -DialogName Example_PCInformation -OnlyCreateVariables
+    #Only creating all variables for data analysis
+    Open-XAMLDialog -DialogName Example_PCInformation -OnlyCreateVariables
 
-#Show dialog in debug mode - breakpoints must be set before starting the GUI
-Open-XAMLDialog -DialogName Example_PCInformation
+    #Show dialog in debug mode - breakpoints must be set before starting the GUI
+    Open-XAMLDialog -DialogName Example_PCInformation
 '@
-            $debugFileContent = $debugFileContent.Replace('%DIALOG%', $($PSGUI_Manager_lvDialogs.SelectedValue.Name))  
-            $debugFileContent | Set-Content $fileDebugAssist   
-        }
+                $debugFileContent = $debugFileContent.Replace('%DIALOG%', $($PSGUI_Manager_lvDialogs.SelectedValue.Name))  
+                $debugFileContent | Set-Content $fileDebugAssist   
+            }
         # open all relevant files in ISE.
-        C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe -File "$fileDebugScript, $fileDebugModule, $fileDebugAssist"
+        C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe -File "$fileDebugAssist, $fileDebugScript, $fileDebugModule"
+        }     
     }
 )
 
