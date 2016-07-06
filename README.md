@@ -1,9 +1,9 @@
-# PSGUI with GUI-Manager
+# PSGUI with PSGUI-Manager
 
 ########################################################################
 ##
 ####    Created by:   	David das Neves
-####   Version:        	0.1
+####   Version:        	0.2
 ##  
 ####   Please view my contributions in my blog for further information. 
 ## 
@@ -16,7 +16,7 @@
 ####  Short Description
 ########################################################################
 
-3 months ago i started a project to create user interfaces for Powershell with WPF as simple as possible for everyone by using a  – POWERSHELL GUI.
+Long time ago i started a project to create user interfaces for Powershell with WPF as simple as possible for everyone by using a  – POWERSHELL GUI.
 
 Powershell GUI with Powershell GUI?! – sounds paradox – but hey – one example will be ready the whole time. :D
 
