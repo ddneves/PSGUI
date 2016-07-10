@@ -12,4 +12,4 @@
 Open-XAMLDialog -DialogName Internal_Clean -OnlyCreateVariables
 
 #Show dialog in debug mode - breakpoints must be set before starting the GUI
-Open-XAMLDialog -DialogName Internal_Clean
+Open-XAMLDialog -DialogName 03_ShowDialogResult

@@ -13,10 +13,6 @@
 #> 
 
 #===========================================================================
-#region functions
-
-#endregion
-#===========================================================================
 
 #===========================================================================
 #region PreFilling
@@ -75,6 +71,7 @@ $PSGUI_Manager.Add_PreviewKeyDown(
 #region EventHandler
 
 #===========================================================================
+
 #region MenuItems
 $PSGUI_Manager_miQuit.Add_Click(
     {
@@ -95,8 +92,11 @@ $PSGUI_Manager_miAbout.Add_Click(
 #region ButtonClicks
 
 $PSGUI_Manager_cbDialogFolders.Add_SelectionChanged(
-    {        
+    {      
         [void]$PSGUI_Manager_lvDialogs.Items.Clear()
+        [void]$PSGUI_Manager_lvVariables.Items.Clear()
+        [void]$PSGUI_Manager_lvEvents.Items.Clear()
+        $PSGUI_Manager_tbCode.Text = ''
         Get-ChildItem -Path $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -Directory | ForEach-Object -Process { 
             $param = [PSCustomObject]@{
                 Name = $_.Name
@@ -195,7 +195,7 @@ $PSGUI_Manager_miDeleteDialog.Add_Click(
 
 $PSGUI_Manager_bOpenDialogFolder.Add_Click(
     {
-        Explorer.exe $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname
+        explorer.exe $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname
     }
 )
 $PSGUI_Manager_miRenderDialog.Add_Click(
@@ -204,7 +204,7 @@ $PSGUI_Manager_miRenderDialog.Add_Click(
         {
             Get-Variable -Name "$($PSGUI_Manager_lvDialogs.SelectedValue.Name)*" | Clear-Variable -Scope global
             Get-Variable -Name "$($PSGUI_Manager_lvDialogs.SelectedValue.Name)*" | Remove-Variable -Scope global
-            Open-XAMLDialog -DialogName ($PSGUI_Manager_lvDialogs.SelectedValue.Name) -DialogPath ([System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name))) -OpenWithOnlyShowFlag
+            Open-XAMLDialog -DialogName ($PSGUI_Manager_lvDialogs.SelectedValue.Name) -DialogPath ([System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name))) #-OpenWithOnlyShowFlag
         } 
     }
 )
@@ -239,8 +239,8 @@ $PSGUI_Manager_miDebugDialog.Add_Click(
                 $debugFileContent = $debugFileContent.Replace('%DIALOG%', $($PSGUI_Manager_lvDialogs.SelectedValue.Name))  
                 $debugFileContent | Set-Content $fileDebugAssist   
             }
-        # open all relevant files in ISE.
-        C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe -File "$fileDebugAssist, $fileDebugScript, $fileDebugModule"
+            # open all relevant files in ISE.
+            C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe -File "$fileDebugAssist, $fileDebugScript, $fileDebugModule"
         }     
     }
 )
@@ -293,7 +293,7 @@ $PSGUI_Manager_miSave.Add_Click(
 $PSGUI_Manager_rCodeBehind.Add_Checked(
     {      
         if ($PSGUI_Manager_lvDialogs.SelectedValue)
-        {
+        {        
             $dialogName = $PSGUI_Manager_lvDialogs.SelectedValue.Name
             $xaml = Get-Content -Path ([System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,"$dialogName\$dialogName.ps1")) -Raw -Encoding UTF8
             $PSGUI_Manager_tbCode.Text = $xaml              
@@ -342,28 +342,28 @@ $PSGUI_Manager_lvDialogs.Add_SelectionChanged(
             $dialogName = $PSGUI_Manager_lvDialogs.SelectedValue.Name
             $PSGUI_Manager_rXAML.IsChecked = $false
             $PSGUI_Manager_rXAML.IsChecked = $true
-
+        
             Initialize-XAMLDialog -XAMLPath ([System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,"$dialogName\$dialogName.xaml")) 
             $PSGUI_Manager_lvVariables.Items.Clear() 
             $PSGUI_Manager_lvEvents.Items.Clear()                
-            
+        
             $variables = Get-Variable -Name "$dialogName*"
-                      
+        
             foreach ($var in $variables)
             {
                 if ($var -and $var.Name -and $var.Value)
                 {
                     $varValue = (($var.Value.ToString()).Replace('System.Windows.','')).Replace('Controls.','')
-                     
+                
                     $param = [PSCustomObject]@{
                         Name   = "$($var.Name)"
                         Objekt = "$varValue"
                     }      
-
+                
                     $PSGUI_Manager_lvVariables.Items.Add($param)
                 }
             }
-        }                  
+        }           
     }
 )
 
@@ -446,3 +446,10 @@ $PSGUI_Manager_lvEvents.Add_MouseDoubleClick(
 
 #endregion
 #===========================================================================
+
+
+#region functions with usage of window controls.
+#===========================================================================
+#===========================================================================
+
+#endregion

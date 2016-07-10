@@ -74,18 +74,18 @@ function Open-XAMLDialog
         #Loads XAML
         Initialize-XAMLDialog -XAMLPath ([System.IO.Path]::Combine($DialogPath,"$DialogName.xaml"))
                 
-        #Loads event and scriptcode
+        #Loads event and scriptcode        
         $scriptfile = ([System.IO.Path]::Combine($DialogPath,"$DialogName.ps1"))
         if (Get-Item -Path ($scriptfile))
         {
             . $scriptfile
         }    
         
-        $additionalScriptfile = ([System.IO.Path]::Combine($DialogPath,"$DialogName.psm1"))
+        $additionalScriptfile = ([System.IO.Path]::Combine($DialogPath,$DialogName + '.psm1'))
         #Loads functions etc.
         if (Get-Item -Path $additionalScriptfile)
         {
-            Import-Module -Name $additionalScriptfile -ErrorAction Continue
+            Import-Module $additionalScriptfile 
         }
                   
         if (-not $OnlyCreateVariables)

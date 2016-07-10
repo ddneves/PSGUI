@@ -1,4 +1,4 @@
-﻿<!-- 
+<!-- 
     .NOTES
     ===========================================================================
         Created on:   	05.07.2016
@@ -186,3 +186,4 @@
         <TextBox Grid.Row="2" Grid.ColumnSpan="5" x:Name="tbCode" TextWrapping="NoWrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Margin="25,40,25,20" AcceptsReturn="True" AcceptsTab="True" />
     </Grid>
 </Window>
+

@@ -1,0 +1,15 @@
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Event" Height="62.5" Width="255.5"  >
+    <Grid>
+        <Button
+         x:Name="bEnde" 
+         Width="80"
+         Height="25"
+         HorizontalAlignment="Right"
+         VerticalAlignment="Bottom">Close!
+        </Button>
+    </Grid>
+</Window>
+

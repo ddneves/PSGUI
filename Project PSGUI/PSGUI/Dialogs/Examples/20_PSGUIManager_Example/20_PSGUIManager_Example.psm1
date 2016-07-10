@@ -4,11 +4,11 @@
         Created on:   	04.10.2015
         Created by:   	David das Neves
         Version:        0.1
-        Project:        PSGUI_Manager_Example
-        Filename:       PSGUI_Manager_Example.psm1
+        Project:        20_PSGUIManager_Example
+        Filename:       20_PSGUIManager_Example.psm1
     ===========================================================================
     .DESCRIPTION
-        Functions for PSGUI_Manager_Example.
+        Functions for 20_PSGUIManager_Example.
 #> 
 
 #===========================================================================
