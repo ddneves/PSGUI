@@ -13,15 +13,19 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Name="btnStop" Content="Stop" Grid.Column="4" HorizontalAlignment="Right" Margin="10" Grid.Row="4" VerticalAlignment="Bottom" Width="75"/>
-        <ListView Name="lvVariables" Grid.Column="2" Grid.Row="0" Margin="15,70,15,15" Height="500">
+        <Button Name="btnStop" Content="Stop" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Grid.Row="1" VerticalAlignment="Bottom" Width="75"/>
+        <ListView Grid.Column="1" Grid.Row="0" Name="lv" Margin="15,70,15,15" Height="500">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="210" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="CPU" Width="250" DisplayMemberBinding="{Binding CPU}"/>
                 </GridView>
             </ListView.View>
-        </ListView>        
+        </ListView>
     </Grid>
 </Window>
+
+
+
+
 
