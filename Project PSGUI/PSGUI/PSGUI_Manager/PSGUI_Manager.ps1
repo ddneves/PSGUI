@@ -19,7 +19,17 @@
 
 $PSGUI_Manager.Add_Loaded(
     {
-        $AllDialogsPaths = Get-ChildItem -Path "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI\Dialogs\" -Directory
+        $PSGUIPath =''
+        $DirectoriesToSearch = [Environment]::GetEnvironmentVariable('PSModulePath').Split(';')
+        foreach ($dir in $DirectoriesToSearch )
+        {
+            $PSGUIPath = Get-ChildItem -Path $dir -Filter 'PSGUI' -Recurse
+            if ($PSGUIPath)
+            {
+                break
+            }
+        }
+        $AllDialogsPaths = Get-ChildItem -Path "$($PSGUIPath.FullName)\Dialogs\" -Directory
 
         $PSGUI_Manager_cbDialogFolders.ItemsSource = $AllDialogsPaths
                 
