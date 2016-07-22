@@ -4,7 +4,7 @@
         ===========================================================================
         Created on:   	06.07.2016
         Created by:   	David das Neves
-        Version:        0.2
+        Version:        0.3
         Project:        PSGUI
         Filename:       Open-XAMLDialog.ps1
         ===========================================================================
@@ -60,7 +60,17 @@ function Open-XAMLDialog
     {     
         if (-not $DialogPath -and (-not $DialogPath -or -not $(Get-Item $DialogPath)))
         {
-            $AllDialogsPaths = Get-ChildItem -Path "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI\Dialogs\" -Directory
+            $PSGUIPath = ''
+            $DirectoriesToSearch = [Environment]::GetEnvironmentVariable('PSModulePath').Split(';')
+            foreach ($dir in $DirectoriesToSearch )
+            {
+                $PSGUIPath = Get-ChildItem -Path $dir -Filter 'PSGUI' -Recurse
+                if ($PSGUIPath)
+                {
+                    break
+                }
+            }
+            $AllDialogsPaths = Get-ChildItem -Path "$($PSGUIPath.FullName)\Dialogs\" -Directory
             foreach ($OneDialogPath in $AllDialogsPaths)
             {
                 if ($DialogName -in (Get-ChildItem -Path $($OneDialogPath.FullName)).Name)
@@ -85,7 +95,7 @@ function Open-XAMLDialog
         #Loads functions etc.
         if (Get-Item -Path $additionalScriptfile)
         {
-            Import-Module $additionalScriptfile 
+            Import-Module $additionalScriptfile
         }
                   
         if (-not $OnlyCreateVariables)
@@ -97,7 +107,7 @@ function Open-XAMLDialog
             else
             {
                 [void]$((Get-Variable -Name $DialogName).Value).Dispatcher.InvokeAsync{
-                    $((Get-Variable -Name $DialogName).Value).ShowDialog() 
+                    $((Get-Variable -Name $DialogName).Value).ShowDialog()
                 }.Wait()
             }    
         }        

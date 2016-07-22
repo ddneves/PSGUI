@@ -4,7 +4,7 @@
         ===========================================================================
         Created on:   	06.07.2016
         Created by:   	David das Neves
-        Version:        0.2
+        Version:        0.3
         Project:        PSGUI
         Filename:       Initialize-XAMLDialog.ps1
         ===========================================================================

@@ -4,7 +4,7 @@
         ===========================================================================
         Created on:   	06.07.2016
         Created by:   	David das Neves
-        Version:        0.2
+        Version:        0.3
         Project:        PSGUI
         Filename:       ExecByShortcut.ps1
         ===========================================================================
@@ -21,7 +21,18 @@ function Start-PSGUIManager
             .EXAMPLE
             Start-PSGUIManager
     #>
+    $PSGUIPath =''
+    $DirectoriesToSearch = [Environment]::GetEnvironmentVariable('PSModulePath').Split(';')
+    foreach ($dir in $DirectoriesToSearch )
+    {
+        $PSGUIPath = Get-ChildItem -Path $dir -Filter 'PSGUI' -Recurse
+        if ($PSGUIPath)
+        {
+            break
+        }
+    }
+
     Open-XAMLDialog -DialogName ('Internal_Start')
-    Open-XAMLDialog -DialogName 'PSGUI_Manager' -DialogPath "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI\PSGUI_Manager"
+    Open-XAMLDialog -DialogName 'PSGUI_Manager' -DialogPath "$($PSGUIPath.FullName)\PSGUI_Manager\"
 }
 
