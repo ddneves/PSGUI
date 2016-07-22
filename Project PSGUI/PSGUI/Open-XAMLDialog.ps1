@@ -60,18 +60,19 @@ function Open-XAMLDialog
     {     
         if (-not $DialogPath -and (-not $DialogPath -or -not $(Get-Item $DialogPath)))
         {
-            $PSGUIPath = ''
-            $DirectoriesToSearch = [Environment]::GetEnvironmentVariable('PSModulePath').Split(';')
-            foreach ($dir in $DirectoriesToSearch )
+        $PSGUIPath =''
+        $DirectoriesToSearch = [Environment]::GetEnvironmentVariable('PSModulePath').Split(';')
+        foreach ($dir in $DirectoriesToSearch )
+        {
+            $PSGUIPath = Get-ChildItem -Path $dir -Filter 'PSGUI' -Recurse
+            if ($PSGUIPath)
             {
-                $PSGUIPath = Get-ChildItem -Path $dir -Filter 'PSGUI' -Recurse
-                if ($PSGUIPath)
-                {
-                    break
-                }
+                $PSGUIPath = Get-ChildItem -Path ($PSGUIPath.FullName) -Filter 'dialogs' -Recurse
+                break
             }
-            $AllDialogsPaths = Get-ChildItem -Path "$($PSGUIPath.FullName)\Dialogs\" -Directory
-            foreach ($OneDialogPath in $AllDialogsPaths)
+        }
+        $AllDialogsPaths = Get-ChildItem -Path ($PSGUIPath.FullName) -Directory   
+        foreach ($OneDialogPath in $AllDialogsPaths)
             {
                 if ($DialogName -in (Get-ChildItem -Path $($OneDialogPath.FullName)).Name)
                 {

@@ -26,10 +26,12 @@ $PSGUI_Manager.Add_Loaded(
             $PSGUIPath = Get-ChildItem -Path $dir -Filter 'PSGUI' -Recurse
             if ($PSGUIPath)
             {
+                $PSGUIPath = Get-ChildItem -Path ($PSGUIPath.FullName) -Filter 'dialogs' -Recurse
                 break
             }
         }
-        $AllDialogsPaths = Get-ChildItem -Path "$($PSGUIPath.FullName)\Dialogs\" -Directory
+        $AllDialogsPaths = Get-ChildItem -Path ($PSGUIPath.FullName) -Directory   
+
 
         $PSGUI_Manager_cbDialogFolders.ItemsSource = $AllDialogsPaths
                 

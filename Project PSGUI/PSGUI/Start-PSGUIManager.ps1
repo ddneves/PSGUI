@@ -25,7 +25,7 @@ function Start-PSGUIManager
     $DirectoriesToSearch = [Environment]::GetEnvironmentVariable('PSModulePath').Split(';')
     foreach ($dir in $DirectoriesToSearch )
     {
-        $PSGUIPath = Get-ChildItem -Path $dir -Filter 'PSGUI' -Recurse
+        $PSGUIPath = Get-ChildItem -Path $dir -Filter 'PSGUI_Manager' -Recurse
         if ($PSGUIPath)
         {
             break
@@ -33,6 +33,5 @@ function Start-PSGUIManager
     }
 
     Open-XAMLDialog -DialogName ('Internal_Start')
-    Open-XAMLDialog -DialogName 'PSGUI_Manager' -DialogPath "$($PSGUIPath.FullName)\PSGUI_Manager\"
+    Open-XAMLDialog -DialogName 'PSGUI_Manager' -DialogPath ($PSGUIPath.FullName)
 }
-
