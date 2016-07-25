@@ -2,7 +2,7 @@
 <#	
         .NOTES
         ===========================================================================
-        Created on:   	05.07.2016
+        Created on:   	25.07.2016
         Created by:   	David das Neves
         Version:        0.43
         Project:        PSGUI_Manager
@@ -62,14 +62,17 @@ $PSGUI_Manager.Add_PreviewKeyDown(
     {
         if(([System.Windows.Input.Keyboard]::IsKeyDown('Ctrl') -eq $true) -and $_.Key -eq 'D') 
         {
+            $PSGUI_Manager_lvDialogs.Focus()
             $PSGUI_Manager_miDebugDialog.RaiseEvent((New-Object -TypeName System.Windows.RoutedEventArgs -ArgumentList $([System.Windows.Controls.MenuItem]::ClickEvent)))
         }
         if(([System.Windows.Input.Keyboard]::IsKeyDown('Ctrl') -eq $true) -and $_.Key -eq 'S') 
-        {
+        {   
+            $PSGUI_Manager_lvDialogs.Focus()
             $PSGUI_Manager_miSave.RaiseEvent((New-Object -TypeName System.Windows.RoutedEventArgs -ArgumentList $([System.Windows.Controls.MenuItem]::ClickEvent)))
         }
         if(([System.Windows.Input.Keyboard]::IsKeyDown('Ctrl') -eq $true) -and $_.Key -eq 'R') 
         {
+            $PSGUI_Manager_lvDialogs.Focus()
             $PSGUI_Manager_miRenderDialog.RaiseEvent((New-Object -TypeName System.Windows.RoutedEventArgs -ArgumentList $([System.Windows.Controls.MenuItem]::ClickEvent)))
         }
     }
@@ -154,6 +157,7 @@ $PSGUI_Manager_miOpenPath.Add_Click(
 )
 $PSGUI_Manager_miNewDialog.Add_Click(
     {
+        $Title_Internal_UserInput = 'Please enter the name for the dialog:'
         Open-XAMLDialog -DialogName ('Internal_UserInput') 
         if ($Returnvalue_Internal_UserInput)
         {     
@@ -171,6 +175,8 @@ $PSGUI_Manager_miNewDialog.Add_Click(
 
 $PSGUI_Manager_miRenameDialog.Add_Click(
     {
+        $Returnvalue_Internal_UserInput = $PSGUI_Manager_lvDialogs.SelectedValue.Name
+        $Title_Internal_UserInput = 'Rename the dialog:'
         Open-XAMLDialog -DialogName ('Internal_UserInput')  
         if ($Returnvalue_Internal_UserInput)
         {     

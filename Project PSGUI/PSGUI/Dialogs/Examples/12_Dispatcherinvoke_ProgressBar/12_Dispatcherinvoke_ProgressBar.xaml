@@ -1,0 +1,9 @@
+<Window 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="167.289" Width="532.712">
+    <Grid>
+        <Button x:Name="bProgress" Content="Progress" HorizontalAlignment="Left" Margin="211,92,0,0" VerticalAlignment="Top" Width="75"/>
+        <ProgressBar x:Name="pbProgress" HorizontalAlignment="Left" Height="22" Margin="33,39,0,0" VerticalAlignment="Top" Width="451"/>
+    </Grid>
+</Window>
