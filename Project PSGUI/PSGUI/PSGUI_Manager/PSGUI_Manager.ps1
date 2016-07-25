@@ -4,7 +4,7 @@
         ===========================================================================
         Created on:   	05.07.2016
         Created by:   	David das Neves
-        Version:        0.3
+        Version:        0.43
         Project:        PSGUI_Manager
         Filename:       PSGUI_Manager.ps1
         ===========================================================================
