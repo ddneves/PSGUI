@@ -303,6 +303,20 @@ $PSGUI_Manager_miSave.Add_Click(
         }                  
     }
 )
+
+$PSGUI_Manager_bOpeninISE.Add_Click(
+    {       
+        if ($PSGUI_Manager_lvDialogs.SelectedValue)
+        {
+            $fileXAML = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name).xaml")
+            $fileScript = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name).ps1")
+            $fileModule = [System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,$($PSGUI_Manager_lvDialogs.SelectedValue.Name),"$($PSGUI_Manager_lvDialogs.SelectedValue.Name).psm1")
+            # open all relevant files in ISE.
+            C:\Windows\System32\WindowsPowerShell\v1.0\powershell_ise.exe -File "$fileXAML, $fileModule, $fileScript"
+        }
+    }
+)
+            
 #endregion
 #===========================================================================
 
