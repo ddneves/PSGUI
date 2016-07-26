@@ -1,16 +1,18 @@
 ﻿# PSGUI with PSGUI-Manager
 
+
+
 ########################################################################
 ##
 ####    Created by:   	David das Neves
-####   Version:        	0.2
+####   Version:        	0.43
 ##  
 ####   Please view my contributions in my blog for further information. 
 ## 
-##  http://powerintheshell.com/psgui-first-start-3/
+## https://powerintheshell.com/2016/07/22/psgui-hello-world-howto/
 ##
 ########################################################################
-
+<img src="https://daviddasneves.files.wordpress.com/2015/07/blog.jpg"></img>
 ########################################################################
 ####  HOWTO
 ########################################################################
