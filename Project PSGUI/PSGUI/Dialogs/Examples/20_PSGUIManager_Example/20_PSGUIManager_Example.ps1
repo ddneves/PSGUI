@@ -4,7 +4,7 @@
         ===========================================================================
         Created on:   	05.07.2016
         Created by:   	David das Neves
-        Version:        0.43
+        Version:        0.5
         Project:        20_PSGUIManager_Example
         Filename:       20_PSGUIManager_Example.ps1
         ===========================================================================
