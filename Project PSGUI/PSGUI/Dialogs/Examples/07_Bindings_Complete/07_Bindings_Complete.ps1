@@ -53,7 +53,6 @@ $07_Bindings_Complete_cbbDienste.add_SourceUpdated(
     {
         [System.Object]$sender = $args[0]
         [System.Windows.RoutedEventArgs]$e = $args[1]   
-        #$07_Bindings_Complete_cbbDienste.ItemsSource = $prozesse
     }
 )
  
@@ -70,3 +69,4 @@ $07_Bindings_Complete_btnStop.add_Click(
 
 
 #endregion
+

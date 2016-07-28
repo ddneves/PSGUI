@@ -1,4 +1,4 @@
-#requires -Version 3 -Modules PSGUI
+#requires -Version 3 
 <#	
         .NOTES
         ===========================================================================
@@ -19,7 +19,7 @@
 
 $PSGUI_Manager.Add_Loaded(
     {
-        $PSGUIPath =''
+        $PSGUIPath = ''
         $DirectoriesToSearch = [Environment]::GetEnvironmentVariable('PSModulePath').Split(';')
         foreach ($dir in $DirectoriesToSearch )
         {
@@ -317,6 +317,37 @@ $PSGUI_Manager_bOpeninISE.Add_Click(
     }
 )
             
+
+$PSGUI_Manager_tbbSave.Add_Click(
+    {      
+        $PSGUI_Manager_miSave.RaiseEvent((New-Object -TypeName System.Windows.RoutedEventArgs -ArgumentList $([System.Windows.Controls.MenuItem]::ClickEvent)))              
+    }
+)
+
+$PSGUI_Manager_tbbWordWrap.Add_Click(
+    {      
+        $PSGUI_Manager_tbCode.WordWrap = -not $PSGUI_Manager_tbCode.WordWrap
+        $PSGUI_Manager.Dispatcher.Invoke([action]{},'Render')
+    }
+)
+
+$PSGUI_Manager_tbbShowLineNumbers.Add_Click(
+    {      
+        $PSGUI_Manager_tbCode.ShowLineNumbers = -not $PSGUI_Manager_tbCode.ShowLineNumbers
+        $PSGUI_Manager.Dispatcher.Invoke([action]{},'Render')
+    }
+)
+
+$PSGUI_Manager_tbbShowEndOfLine.Add_Click(
+    {      
+        $PSGUI_Manager_tbCode.Options.ShowEndOfLine = -not $PSGUI_Manager_tbCode.Options.ShowEndOfLine
+        $PSGUI_Manager.Dispatcher.Invoke([action]{},'Render')
+    }
+)
+
+
+
+          
 #endregion
 #===========================================================================
 
@@ -327,8 +358,8 @@ $PSGUI_Manager_rCodeBehind.Add_Checked(
         if ($PSGUI_Manager_lvDialogs.SelectedValue)
         {        
             $dialogName = $PSGUI_Manager_lvDialogs.SelectedValue.Name
-            $xaml = Get-Content -Path ([System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,"$dialogName\$dialogName.ps1")) -Raw -Encoding UTF8
-            $PSGUI_Manager_tbCode.Text = $xaml              
+            $ps1 = Get-Content -Path ([System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,"$dialogName\$dialogName.ps1")) -Raw -Encoding UTF8
+               $PSGUI_Manager_tbCode.Text = $ps1
         }                  
     }
 )
@@ -349,8 +380,8 @@ $PSGUI_Manager_rFunctions.Add_Checked(
         if ($PSGUI_Manager_lvDialogs.SelectedValue)
         {
             $dialogName = $PSGUI_Manager_lvDialogs.SelectedValue.Name
-            $xaml = Get-Content -Path ([System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,"$dialogName\$dialogName.psm1")) -Raw -Encoding UTF8
-            $PSGUI_Manager_tbCode.Text = $xaml
+            $psm1 = Get-Content -Path ([System.IO.Path]::Combine($($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname,"$dialogName\$dialogName.psm1")) -Raw -Encoding UTF8
+            $PSGUI_Manager_tbCode.Text = $psm1
         }              
     }
 )

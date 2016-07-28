@@ -28,10 +28,16 @@ function Start-PSGUIManager
         $PSGUIPath = Get-ChildItem -Path $dir -Filter 'PSGUI_Manager' -Recurse
         if ($PSGUIPath)
         {
+            Open-XAMLDialog -DialogName ('Internal_Start')
+            Add-Type -Path "$($PSGUIPath.FullName)\Resources\ICSharpCode.AvalonEdit.dll"
+            Add-Type -AssemblyName System.Windows.Forms
+            Open-XAMLDialog -DialogName 'PSGUI_Manager' -DialogPath ($PSGUIPath.FullName)
             break
         }
     }
-
-    Open-XAMLDialog -DialogName ('Internal_Start')
-    Open-XAMLDialog -DialogName 'PSGUI_Manager' -DialogPath ($PSGUIPath.FullName)
+    if (-not $PSGUIPath)
+    {
+        Write-Error 'MoudlePath not found - are you trying to start PSGUIManager in a other Usercontext?'
+    }
+   
 }

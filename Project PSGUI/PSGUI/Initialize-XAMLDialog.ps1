@@ -79,14 +79,14 @@ function Initialize-XAMLDialog
         [xml]$xmlWPF = $preload
 
         #Retrieve namespace
-        $matchesFile = [regex]::Matches($preload,'(xmlns:)[a-z,A-Z,0-9]')
+        $matchesFile = [regex]::Matches($preload,' [a-z,A-Z,0-9](:Class)')
 
         if ($matchesFile.Count -eq 1)
         {
-            $namespaceName = ($matchesFile.Value).Split(':')[-1]
-
-            #Remove class attribute
+            #Remove class attribute            
+            $namespaceName = ($matchesFile.Value).Split(':')[0]
             $xmlWPF.Window.RemoveAttribute($namespaceName + ':Class')
+            $xmlWPF.Window.RemoveAttribute('x:Class')
         } 
     }
     Process
