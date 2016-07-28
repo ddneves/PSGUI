@@ -107,7 +107,7 @@
             <RowDefinition Height="1.5*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.43*" />
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="0.94*" />
             <ColumnDefinition Width="auto" />
@@ -138,14 +138,14 @@
                 <MenuItem x:Name="miNewDialog" Header="New Dialog" ToolTip="Creates a new dialog." />
                 <MenuItem x:Name="miRenameDialog" Header="Rename Dialog" ToolTip="Renames the selected dialog."/>
                 <MenuItem x:Name="miDeleteDialog" Header="Delete Dialog" ToolTip="Deletes the selected dialog."/>
-                <MenuItem x:Name="miExportDialog" Header="Export Dialog" ToolTip="Exports the selected dialog as folder."/>
-                <MenuItem x:Name="miImportDialog" Header="Import Dialog" ToolTip="Imports a dialog folder."/>
+                <!--<MenuItem x:Name="miExportDialog" Header="Export Dialog" ToolTip="Exports the selected dialog as folder."/>
+                <MenuItem x:Name="miImportDialog" Header="Import Dialog" ToolTip="Imports a dialog folder."/>-->
                 <MenuItem x:Name="miDebugDialog" Header="Debug Dialog"  InputGestureText="Ctrl+D" ToolTip="Debug-assistance in ISE for the selected dialog."/>
                 <MenuItem x:Name="miRenderDialog" Header="Render Dialog"  InputGestureText="Ctrl+R" ToolTip="Renders the selected dialog."/>
             </MenuItem>
-            <MenuItem Header="Package" Width="70px" Foreground="White" >
+            <!--<MenuItem Header="Package" Width="70px" Foreground="White" >
                 <MenuItem x:Name="miCreatePackage" Header="Create Package" ToolTip="Creates a Package with automatic PSGUI-installation with the selected dialog."/>
-            </MenuItem>
+            </MenuItem>-->
             <!--<MenuItem Header="Options" Width="70px" Foreground="White">
                 <MenuItem x:Name="miOptionsGUI" Header="GUI" />
             </MenuItem>-->
