@@ -2,9 +2,9 @@
 <#	
         .NOTES
         ===========================================================================
-        Created on:   	06.07.2016
+        Created on:   	29.07.2016
         Created by:   	David das Neves
-        Version:        0.5
+        Version:        0.53
         Project:        PSGUI
         Filename:       New-XAMLDialog.ps1
         ===========================================================================
@@ -38,7 +38,7 @@ function New-XAMLDialog
 
         #Name of the internal dialogpath
         [Parameter(Mandatory = $false, Position = 3)]
-        $Internal_DialogFolder = "$env:UserProfile\Documents\WindowsPowerShell\Modules\PSGUI\Dialogs\Internal"
+        $Internal_DialogFolder 
     )
 
     Begin
@@ -48,11 +48,21 @@ function New-XAMLDialog
     {
         if (-not (Test-Path -Path "$DialogPath\$DialogName"))
         {
-            Copy-Item -Path "$Internal_DialogFolder\Internal_Clean" -Destination "$DialogPath\$DialogName" -Recurse
-            Get-ChildItem -Path "$DialogPath\$DialogName" -Recurse -Include '*.ps*1', '*.xaml' | Rename-Item -NewName {
-                $_.Name -replace 'Internal_Clean', $DialogName
-            }            
-        }
+            $PSGUIPath = ''
+            $DirectoriesToSearch = [Environment]::GetEnvironmentVariable('PSModulePath').Split(';')
+            foreach ($dir in $DirectoriesToSearch )
+            {
+                $Internal_DialogFolder = Get-ChildItem -Path $dir -Filter 'Internal' -Recurse
+                if ($Internal_DialogFolder)
+                {
+                    Copy-Item -Path "$($Internal_DialogFolder.FullName)\Internal_Clean" -Destination "$DialogPath\$DialogName" -Recurse
+                    Get-ChildItem -Path "$DialogPath\$DialogName" -Recurse -Include '*.ps*1', '*.xaml' | Rename-Item -NewName {
+                        $_.Name -replace 'Internal_Clean', $DialogName
+                    }
+                    break
+                }
+            }
+        } 
     }
     End
     {

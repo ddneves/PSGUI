@@ -178,6 +178,7 @@ $PSGUI_Manager_miRenameDialog.Add_Click(
         $Returnvalue_Internal_UserInput = $PSGUI_Manager_lvDialogs.SelectedValue.Name
         $Title_Internal_UserInput = 'Rename the dialog:'
         Open-XAMLDialog -DialogName ('Internal_UserInput')  
+        $Returnvalue_Internal_UserInput = (Get-Variable -Name Returnvalue_Internal_UserInput -Scope Global).Value
         if ($Returnvalue_Internal_UserInput)
         {     
             Rename-XAMLDialog -DialogName ($PSGUI_Manager_lvDialogs.SelectedValue.Name) -DialogPath $($PSGUI_Manager_cbDialogFolders.SelectedItem).Fullname -NewDialogName $Returnvalue_Internal_UserInput
